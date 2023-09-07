@@ -44,9 +44,17 @@ public class TypeActivityServiceImpl implements TypeActivityService{
     }
 
     @Override
-    public void deleteTypeActivity(Integer id) {
+    public void deleteTypeActivity(Integer id) throws ResourceNotFoundException{
         TypeActivity deleteTypeActivity = this.typeActivityRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Recurso no encontrado"));
+        log.warn("Type  Activity delete .> " + id);
         this.typeActivityRepository.delete(deleteTypeActivity);
+    }
+
+    @Override
+    public void validateTypeActivityExist(Integer id) throws ResourceNotFoundException{
+        this.typeActivityRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Tipo de Actividad no encontrada"));
+        log.warn("Type Activity validate service not resource by id -> " + id);
     }
 }

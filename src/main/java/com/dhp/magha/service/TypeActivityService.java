@@ -15,4 +15,6 @@ public interface TypeActivityService {
     public TypeActivity updateTypeActivity(TypeActivityDTO typeActivityDTO);
 
     public void deleteTypeActivity(Integer id);
+
+    public void validateTypeActivityExist(Integer id);
 }
