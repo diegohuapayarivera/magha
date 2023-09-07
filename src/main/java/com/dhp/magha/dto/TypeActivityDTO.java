@@ -11,5 +11,6 @@ import lombok.ToString;
 @ToString
 public class TypeActivityDTO {
 
+    private Integer id;
     private String description;
 }

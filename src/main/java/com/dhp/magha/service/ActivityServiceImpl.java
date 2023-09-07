@@ -23,6 +23,7 @@ public class ActivityServiceImpl implements ActivityService{
 
     @Override
     public List<Activity> getActivitys() {
+        log.info("Get List Type Activitys");
         return this.activityRespository.findAll();
     }
 
@@ -44,7 +45,8 @@ public class ActivityServiceImpl implements ActivityService{
 
     @Override
     public void deleteActivity(Integer id) {
-        Activity deleteActivity = this.activityRespository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Recurso no encontrado"));
+        Activity deleteActivity = this.activityRespository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Recurso no encontrado"));
         this.activityRespository.deleteById(deleteActivity.getId());
     }
 }
