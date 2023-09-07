@@ -23,7 +23,7 @@ public class ActivityController {
 
     @GetMapping
     public ResponseEntity<List<Activity>> getActivitys(){
-        log.info("Activity get List -> " + this.activityService.getActivitys());
+        log.info("Activity get List controller -> " + this.activityService.getActivitys());
         return new ResponseEntity<>(this.activityService.getActivitys(), HttpStatus.OK);
     }
 
