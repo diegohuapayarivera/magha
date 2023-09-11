@@ -3,6 +3,7 @@ package com.dhp.magha.controller;
 import com.dhp.magha.dto.ActivityDTO;
 import com.dhp.magha.model.Activity;
 import com.dhp.magha.service.ActivityService;
+import com.dhp.magha.service.TypeActivityService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,10 +16,13 @@ import java.util.List;
 @Slf4j
 public class ActivityController {
 
-    private ActivityService activityService;
+    private final ActivityService activityService;
 
-    public ActivityController(ActivityService activityService) {
+    private final TypeActivityService typeActivityService;
+
+    public ActivityController(ActivityService activityService, TypeActivityService typeActivityService) {
         this.activityService = activityService;
+        this.typeActivityService = typeActivityService;
     }
 
     @GetMapping
@@ -30,12 +34,14 @@ public class ActivityController {
     @PostMapping("/create")
     public ResponseEntity<Activity> createActivity(@RequestBody ActivityDTO activityDTO){
         log.info("Activity create controller -> " + activityDTO.toString());
+        this.typeActivityService.validateTypeActivityExist(activityDTO.getTypeActivity());
         return new ResponseEntity<>(this.activityService.createActivity(activityDTO), HttpStatus.CREATED);
     }
 
     @PutMapping("/update")
     public ResponseEntity<Activity> updateActivity(@RequestBody ActivityDTO activityDTO){
         log.info("Activity update controller -> "+ activityDTO);
+        this.typeActivityService.validateTypeActivityExist(activityDTO.getTypeActivity());
         return new ResponseEntity<>(this.activityService.updateActivity(activityDTO), HttpStatus.OK);
     }
 

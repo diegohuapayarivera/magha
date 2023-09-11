@@ -44,7 +44,7 @@ public class ActivityServiceImpl implements ActivityService{
     }
 
     @Override
-    public void deleteActivity(Integer id) {
+    public void deleteActivity(Integer id) throws ResourceNotFoundException{
         Activity deleteActivity = this.activityRespository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Recurso no encontrado"));
         this.activityRespository.deleteById(deleteActivity.getId());
