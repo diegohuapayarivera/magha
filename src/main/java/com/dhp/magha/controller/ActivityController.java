@@ -5,6 +5,7 @@ import com.dhp.magha.model.Activity;
 import com.dhp.magha.service.ActivityService;
 import com.dhp.magha.service.TypeActivityService;
 import lombok.extern.slf4j.Slf4j;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,14 +33,14 @@ public class ActivityController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Activity> createActivity(@RequestBody ActivityDTO activityDTO){
+    public ResponseEntity<Activity> createActivity(@RequestBody @NotNull ActivityDTO activityDTO){
         log.info("Activity create controller -> " + activityDTO.toString());
         this.typeActivityService.validateTypeActivityExist(activityDTO.getTypeActivity());
         return new ResponseEntity<>(this.activityService.createActivity(activityDTO), HttpStatus.CREATED);
     }
 
     @PutMapping("/update")
-    public ResponseEntity<Activity> updateActivity(@RequestBody ActivityDTO activityDTO){
+    public ResponseEntity<Activity> updateActivity(@RequestBody @NotNull ActivityDTO activityDTO){
         log.info("Activity update controller -> "+ activityDTO);
         this.typeActivityService.validateTypeActivityExist(activityDTO.getTypeActivity());
         return new ResponseEntity<>(this.activityService.updateActivity(activityDTO), HttpStatus.OK);
