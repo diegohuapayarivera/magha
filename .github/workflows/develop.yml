@@ -30,13 +30,6 @@ jobs:
           mvn clean
           mvn -B package --file pom.xml
 
-  push-dockerfile:
-    name: Build and Deploy Spring boot for beginner
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
       - name: Build Docker Image
         uses: docker/build-push-action@v2
         with:
